@@ -25,6 +25,13 @@ export default function LearnPage() {
     utterance.rate = 0.9 // Slightly slower for clarity
     utterance.pitch = 1.2 // Slightly higher pitch for child-friendly tone
     
+    // Try to find an Indonesian voice
+    const voices = window.speechSynthesis.getVoices()
+    const indonesianVoice = voices.find(voice => voice.lang.startsWith('id'))
+    if (indonesianVoice) {
+      utterance.voice = indonesianVoice
+    }
+    
     synthRef.current = utterance
     window.speechSynthesis.speak(utterance)
   }

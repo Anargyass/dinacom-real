@@ -24,6 +24,13 @@ export default function ComparePage() {
     utterance.rate = 0.9
     utterance.pitch = 1.2
     
+    // Try to find an Indonesian voice
+    const voices = window.speechSynthesis.getVoices()
+    const indonesianVoice = voices.find(voice => voice.lang.startsWith('id'))
+    if (indonesianVoice) {
+      utterance.voice = indonesianVoice
+    }
+    
     synthRef.current = utterance
     window.speechSynthesis.speak(utterance)
   }

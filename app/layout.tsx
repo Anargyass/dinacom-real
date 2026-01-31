@@ -10,7 +10,7 @@ const lexend = Lexend({
 });
 
 export const metadata: Metadata = {
-  title: "EduDesper - Platform Belajar untuk Disleksia",
+  title: "Preder - Platform Belajar untuk Disleksia denagn AI Assisted Learning",
   description: "Platform pembelajaran interaktif khusus untuk penyandang disleksia",
 };
 
