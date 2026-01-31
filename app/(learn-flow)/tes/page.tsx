@@ -160,17 +160,25 @@ export default function TestPage() {
           }
         } else {
           setTotalWrong(prev => prev + 1)
+          // Track wrong count for this batch to know how many to reload
+          const wrongCountInBatch = questions.slice(currentQuestionIndex + 1).filter((_, idx) => {
+            // This will be calculated after we know the total wrong
+            return false
+          }).length
         }
         
-        // Move to next question or generate new one
+        // Move to next question or generate new ones based on wrong count
         setTimeout(() => {
           setShowFeedback(false)
           if (currentQuestionIndex < questions.length - 1) {
             setCurrentQuestionIndex(prev => prev + 1)
             setSelectedAnswer(null)
           } else {
-            // Generate 1 new question with same difficulty
-            fetchQuestions(currentDifficulty, 1)
+            // Generate new questions equal to total wrong count so far
+            const newQuestionsToGenerate = totalWrong + (isCorrect ? 0 : 1)
+            if (newQuestionsToGenerate > 0) {
+              fetchQuestions(currentDifficulty, newQuestionsToGenerate)
+            }
           }
         }, 2000)
       }

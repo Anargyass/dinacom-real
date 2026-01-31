@@ -51,7 +51,7 @@ export const LEARNING_MATERIALS: LearningMaterial[] = [
     letter: 'I',
     uppercase: 'I',
     lowercase: 'i',
-    sound: 'iii',
+    sound: 'i',
     shapeDescription: 'Bentuk huruf I seperti TIANG LURUS dengan titik di atas',
     shapeVisual: '🕯️',
     examples: [
@@ -69,7 +69,7 @@ export const LEARNING_MATERIALS: LearningMaterial[] = [
     letter: 'U',
     uppercase: 'U',
     lowercase: 'u',
-    sound: 'uuu',
+    sound: 'u',
     shapeDescription: 'Bentuk huruf U seperti MANGKUK atau EMBER untuk menampung air',
     shapeVisual: '🥣',
     examples: [
@@ -87,7 +87,7 @@ export const LEARNING_MATERIALS: LearningMaterial[] = [
     letter: 'E',
     uppercase: 'E',
     lowercase: 'e',
-    sound: 'eee',
+    sound: 'e',
     shapeDescription: 'Bentuk huruf E seperti SISIR dengan 3 gigi',
     shapeVisual: '🧲',
     examples: [
@@ -105,7 +105,7 @@ export const LEARNING_MATERIALS: LearningMaterial[] = [
     letter: 'O',
     uppercase: 'O',
     lowercase: 'o',
-    sound: 'ooo',
+    sound: 'o',
     shapeDescription: 'Bentuk huruf O seperti BOLA BUNDAR atau DONAT',
     shapeVisual: '⚽',
     examples: [
@@ -125,7 +125,7 @@ export const LEARNING_MATERIALS: LearningMaterial[] = [
     letter: 'B',
     uppercase: 'B',
     lowercase: 'b',
-    sound: 'be',
+    sound: 'b',
     shapeDescription: 'Bentuk huruf B seperti PERUT yang BUNDAR 2 kali',
     shapeVisual: '🎈',
     examples: [
@@ -143,7 +143,7 @@ export const LEARNING_MATERIALS: LearningMaterial[] = [
     letter: 'D',
     uppercase: 'D',
     lowercase: 'd',
-    sound: 'de',
+    sound: 'd',
     shapeDescription: 'Bentuk huruf D seperti PERUT BESAR sebelah kanan',
     shapeVisual: '🌙',
     examples: [
@@ -161,7 +161,7 @@ export const LEARNING_MATERIALS: LearningMaterial[] = [
     letter: 'M',
     uppercase: 'M',
     lowercase: 'm',
-    sound: 'em',
+    sound: 'm',
     shapeDescription: 'Bentuk huruf M seperti DUA BUKIT atau GUNUNG kembar',
     shapeVisual: '⛰️',
     examples: [
@@ -179,7 +179,7 @@ export const LEARNING_MATERIALS: LearningMaterial[] = [
     letter: 'N',
     uppercase: 'N',
     lowercase: 'n',
-    sound: 'en',
+    sound: 'n',
     shapeDescription: 'Bentuk huruf N seperti SATU BUKIT atau TANJAKAN',
     shapeVisual: '🏔️',
     examples: [
@@ -197,7 +197,7 @@ export const LEARNING_MATERIALS: LearningMaterial[] = [
     letter: 'P',
     uppercase: 'P',
     lowercase: 'p',
-    sound: 'pe',
+    sound: 'p',
     shapeDescription: 'Bentuk huruf P seperti BENDERA di tiang',
     shapeVisual: '🚩',
     examples: [
@@ -215,7 +215,7 @@ export const LEARNING_MATERIALS: LearningMaterial[] = [
     letter: 'Q',
     uppercase: 'Q',
     lowercase: 'q',
-    sound: 'ki',
+    sound: 'q',
     shapeDescription: 'Bentuk huruf Q seperti BOLA dengan EKOR pendek',
     shapeVisual: '🎾',
     examples: [
@@ -231,7 +231,7 @@ export const LEARNING_MATERIALS: LearningMaterial[] = [
     letter: 'W',
     uppercase: 'W',
     lowercase: 'w',
-    sound: 'we',
+    sound: 'w',
     shapeDescription: 'Bentuk huruf W seperti DUA LEMBAH atau GELOMBANG AIR',
     shapeVisual: '〰️',
     examples: [
@@ -303,7 +303,7 @@ export const COMPARISON_MATERIALS: ComparisonMaterial[] = [
     letterLeft: {
       uppercase: 'B',
       lowercase: 'b',
-      sound: 'Be',
+      sound: 'B',
       tips: 'BOBOT berat di BAWAH',
       examples: [
         { word: 'BOLA', emoji: '⚽', description: 'Mainan yang bulat' },
@@ -313,7 +313,7 @@ export const COMPARISON_MATERIALS: ComparisonMaterial[] = [
     letterRight: {
       uppercase: 'D',
       lowercase: 'd',
-      sound: 'De',
+      sound: 'D',
       tips: 'DASNYA DI ATAS',
       examples: [
         { word: 'DADU', emoji: '🎲', description: 'Mainan kotak dengan angka' },
@@ -328,7 +328,7 @@ export const COMPARISON_MATERIALS: ComparisonMaterial[] = [
     letterLeft: {
       uppercase: 'P',
       lowercase: 'p',
-      sound: 'Pe',
+      sound: 'P',
       tips: 'Perut DI ATAS',
       examples: [
         { word: 'PAPA', emoji: '👨', description: 'Ayah yang melindungi kita' },
@@ -338,7 +338,7 @@ export const COMPARISON_MATERIALS: ComparisonMaterial[] = [
     letterRight: {
       uppercase: 'Q',
       lowercase: 'q',
-      sound: 'Ki',
+      sound: 'q',
       tips: 'Ekor BAWAH',
       examples: [
         { word: 'QORI', emoji: '📖', description: 'Pembaca Al-Quran' },
@@ -353,7 +353,7 @@ export const COMPARISON_MATERIALS: ComparisonMaterial[] = [
     letterLeft: {
       uppercase: 'W',
       lowercase: 'w',
-      sound: 'We',
+      sound: 'W',
       tips: 'GELOMBANG BANYAK (3-4 puncak)',
       examples: [
         { word: 'WARNA', emoji: '🎨', description: 'Merah, biru, kuning' },
@@ -363,7 +363,7 @@ export const COMPARISON_MATERIALS: ComparisonMaterial[] = [
     letterRight: {
       uppercase: 'M',
       lowercase: 'm',
-      sound: 'Em',
+      sound: 'm',
       tips: 'GUNUNG KEMBAR (2 puncak)',
       examples: [
         { word: 'MAMA', emoji: '👩', description: 'Ibu yang merawat kita' },
@@ -378,7 +378,7 @@ export const COMPARISON_MATERIALS: ComparisonMaterial[] = [
     letterLeft: {
       uppercase: 'N',
       lowercase: 'n',
-      sound: 'En',
+      sound: 'n',
       tips: 'Satu PEROSOTAN',
       examples: [
         { word: 'NASI', emoji: '🍚', description: 'Makanan pokok kita' },
@@ -388,7 +388,7 @@ export const COMPARISON_MATERIALS: ComparisonMaterial[] = [
     letterRight: {
       uppercase: 'M',
       lowercase: 'm',
-      sound: 'Em',
+      sound: 'm',
       tips: 'DUA PUNCAK',
       examples: [
         { word: 'MAMA', emoji: '👩', description: 'Ibu yang merawat kita' },
@@ -403,7 +403,7 @@ export const COMPARISON_MATERIALS: ComparisonMaterial[] = [
     letterLeft: {
       uppercase: 'N',
       lowercase: 'n',
-      sound: 'En',
+      sound: 'n',
       tips: 'Naik lalu turun seperti TANJAKAN',
       examples: [
         { word: 'NANAS', emoji: '🍍', description: 'Buah berduri berwarna kuning' },
@@ -413,7 +413,7 @@ export const COMPARISON_MATERIALS: ComparisonMaterial[] = [
     letterRight: {
       uppercase: 'U',
       lowercase: 'u',
-      sound: 'Uuu',
+      sound: 'U',
       tips: 'Cekungan seperti MANGKUK',
       examples: [
         { word: 'ULAR', emoji: '🐍', description: 'Hewan melata yang panjang' },
@@ -428,7 +428,7 @@ export const COMPARISON_MATERIALS: ComparisonMaterial[] = [
     letterLeft: {
       uppercase: 'Q',
       lowercase: 'q',
-      sound: 'Ki',
+      sound: 'q',
       tips: 'Lingkaran dengan EKOR',
       examples: [
         { word: 'QORI', emoji: '📖', description: 'Pembaca Al-Quran' },
@@ -438,7 +438,7 @@ export const COMPARISON_MATERIALS: ComparisonMaterial[] = [
     letterRight: {
       uppercase: 'O',
       lowercase: 'o',
-      sound: 'Ooo',
+      sound: 'o',
       tips: 'Lingkaran SEMPURNA tanpa ekor',
       examples: [
         { word: 'ORANG', emoji: '🧑', description: 'Manusia seperti kita' },
