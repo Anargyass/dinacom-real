@@ -50,7 +50,7 @@ interface ReportData {
   recommendations: string
 }
 
-const API_BASE_URL = 'http://192.168.29.168:8080'
+const API_BASE_URL = 'https://dinacom-be.evandra.works'
 
 export default function ResultPage() {
   const [sessionData, setSessionData] = useState<SessionData[]>([])
@@ -67,78 +67,65 @@ export default function ResultPage() {
     if (storedUserId && storedSessionId) {
       setUserId(storedUserId)
       setSessionId(storedSessionId)
-      fetchSessionData(storedSessionId)
-      fetchReport(storedSessionId)
+      fetchReportStats(storedSessionId)
     }
   }, [])
 
-  const fetchSessionData = async (sId: string) => {
+  const fetchReportStats = async (sId: string) => {
     try {
       setIsLoading(true)
-      const response = await fetch(`${API_BASE_URL}/questions/sessions/${sId}`)
-      const result = await response.json()
-
-      if (result.success && result.data) {
-        setSessionData(result.data)
-        calculateStats(result.data)
-      }
-    } catch (error) {
-      console.error('Error fetching session data:', error)
-    } finally {
-      setIsLoading(false)
-    }
-  }
-
-  const fetchReport = async (sId: string) => {
-    try {
       const response = await fetch(`${API_BASE_URL}/report/sessions/${sId}`)
       const result = await response.json()
 
       if (result.success && result.data) {
         setReport(result.data)
+        
+        // Parse accuracy_rate string to number (e.g., "50.0%" -> 50)
+        const accuracyString = result.data.accuracy_rate.replace('%', '')
+        const percentage = Math.round(parseFloat(accuracyString))
+        
+        // Determine level based on accuracy
+        let level = 'Pemula'
+        if (percentage >= 80) {
+          level = 'Jenius'
+        } else if (percentage >= 60) {
+          level = 'Pintar'
+        } else if (percentage >= 40) {
+          level = 'Lumayan'
+        }
+        
+        // Extract difficulty stats from report
+        // difficulty_stats contains total attempts (number of questions answered)
+        const diffStats = result.data.difficulty_stats || {}
+        const easyTotal = diffStats.easy || 0
+        const mediumTotal = diffStats.medium || 0
+        const hardTotal = diffStats.hard || 0
+        
+        // User needs 3 correct answers to pass each difficulty level
+        // So the correct count is always 3 for each level they completed
+        // If they didn't complete a level, we calculate from total attempts
+        const easyCorrect = easyTotal > 0 ? Math.min(3, easyTotal) : 0
+        const mediumCorrect = mediumTotal > 0 ? Math.min(3, mediumTotal) : 0
+        const hardCorrect = hardTotal > 0 ? Math.min(3, hardTotal) : 0
+        
+        setStats({
+          easyCorrect,
+          easyTotal,
+          mediumCorrect,
+          mediumTotal,
+          hardCorrect,
+          hardTotal,
+          totalCorrect: result.data.correct_answers,
+          totalQuestions: result.data.total_questions,
+          percentage,
+          level
+        })
       }
     } catch (error) {
-      console.error('Error fetching report:', error)
+      console.error('Error fetching report stats:', error)
+    } finally {
+      setIsLoading(false)
     }
-  }
-
-  const calculateStats = (data: SessionData[]) => {
-    const easyQuestions = data.filter(q => q.difficulty === 'easy')
-    const mediumQuestions = data.filter(q => q.difficulty === 'medium')
-    const hardQuestions = data.filter(q => q.difficulty === 'hard')
-
-    const easyCorrect = easyQuestions.filter(q => q.is_correct).length
-    const mediumCorrect = mediumQuestions.filter(q => q.is_correct).length
-    const hardCorrect = hardQuestions.filter(q => q.is_correct).length
-
-    const totalCorrect = easyCorrect + mediumCorrect + hardCorrect
-    const totalQuestions = data.length
-    const percentage = Math.round((totalCorrect / totalQuestions) * 100)
-
-    let level = 'Pemula'
-    if (percentage >= 80) {
-      level = 'Jenius'
-    } else if (percentage >= 60) {
-      level = 'Pintar'
-    } else if (percentage >= 40) {
-      level = 'Lumayan'
-    }
-
-    setStats({
-      easyCorrect,
-      easyTotal: easyQuestions.length,
-      mediumCorrect,
-      mediumTotal: mediumQuestions.length,
-      hardCorrect,
-      hardTotal: hardQuestions.length,
-      totalCorrect,
-      totalQuestions,
-      percentage,
-      level
-    })
-
-    // Clean up session ID after getting results
-    localStorage.removeItem('preder_current_session_id')
   }
 
   if (isLoading) {
@@ -225,7 +212,6 @@ export default function ResultPage() {
                     strokeDasharray={`${(stats.percentage / 100) * 440} 440`}
                     strokeLinecap="round"
                   />
-                  <circle cx="80" cy="80" r="6" fill="#10B981" />
                 </svg>
                 <div className="absolute inset-0 flex items-center justify-center">
                   <div className="text-center">
@@ -320,44 +306,50 @@ export default function ResultPage() {
           </div>
 
           {/* Info Section */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
-            {/* Left Info - AI Analysis and Recommendations */}
-            <div className="bg-gray-50 rounded-2xl p-8 border border-gray-200">
-              <h4 className="font-bold text-gray-900 mb-4 text-lg">Analisis AI:</h4>
-              <div className="text-gray-700 mb-6 leading-relaxed prose prose-sm max-w-none">
-                <ReactMarkdown>{report?.ai_analysis || 'Sedang menganalisis...'}</ReactMarkdown>
+          <div className="space-y-8 mb-12">
+            {/* Top Row - AI Analysis and Error Patterns */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              {/* Top Left - AI Analysis */}
+              <div className="bg-gray-50 rounded-2xl p-8 border border-gray-200">
+                <h4 className="font-bold text-gray-900 mb-4 text-lg">Analisis AI:</h4>
+                <div className="text-gray-700 leading-relaxed prose prose-sm max-w-none">
+                  <ReactMarkdown>{report?.ai_analysis || 'Sedang menganalisis...'}</ReactMarkdown>
+                </div>
               </div>
-              
+
+              {/* Top Right - Error Patterns */}
+              <div className="bg-gray-50 rounded-2xl p-8 border border-gray-200">
+                <h4 className="font-bold text-gray-900 mb-4 text-lg">Pola Kesalahan:</h4>
+                {report?.error_patterns && report.error_patterns.length > 0 ? (
+                  <ul className="space-y-3">
+                    {report.error_patterns.map((pattern, index) => (
+                      <li key={index} className="flex items-start">
+                        <span className="font-bold text-gray-900 mr-3">•</span>
+                        <span className="text-gray-700">
+                          Huruf <span className="font-bold">{pattern.letter_pair}</span>: {pattern.error_count}/{pattern.total_count} salah ({pattern.error_rate})
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+                ) : (
+                  <p className="text-gray-500">Tidak ada pola kesalahan yang terdeteksi.</p>
+                )}
+              </div>
+            </div>
+
+            {/* Bottom Row - Recommendations (Full Width) */}
+            <div className="bg-gray-50 rounded-2xl p-8 border border-gray-200">
               <h4 className="font-bold text-gray-900 mb-4 text-lg">Rekomendasi:</h4>
               <div className="text-gray-700 leading-relaxed prose prose-sm max-w-none">
                 <ReactMarkdown>{report?.recommendations || 'Sedang menyiapkan rekomendasi...'}</ReactMarkdown>
               </div>
-            </div>
-
-            {/* Right Info - Error Patterns */}
-            <div className="bg-gray-50 rounded-2xl p-8 border border-gray-200">
-              <h4 className="font-bold text-gray-900 mb-4 text-lg">Pola Kesalahan:</h4>
-              {report?.error_patterns && report.error_patterns.length > 0 ? (
-                <ul className="space-y-3">
-                  {report.error_patterns.map((pattern, index) => (
-                    <li key={index} className="flex items-start">
-                      <span className="font-bold text-gray-900 mr-3">•</span>
-                      <span className="text-gray-700">
-                        Huruf <span className="font-bold">{pattern.letter_pair}</span>: {pattern.error_count}/{pattern.total_count} salah ({pattern.error_rate})
-                      </span>
-                    </li>
-                  ))}
-                </ul>
-              ) : (
-                <p className="text-gray-500">Tidak ada pola kesalahan yang terdeteksi.</p>
-              )}
             </div>
           </div>
 
           {/* Button */}
           <div className="flex justify-center">
             <Link
-              href="/learn-flow/start"
+              href="/chatbot"
               className="px-16 py-4 bg-slate-800 text-white font-bold text-lg rounded-lg hover:bg-slate-900 transition-colors"
             >
               Selanjutnya

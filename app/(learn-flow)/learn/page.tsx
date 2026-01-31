@@ -30,7 +30,7 @@ export default function LearnPage() {
   }
 
   const handlePlayLetterSound = () => {
-    playAudio(`${material.uppercase}... ${material.sound}`)
+    playAudio(material.sound)
   }
 
   const handlePlayExampleWord = (word: string) => {
@@ -145,7 +145,7 @@ export default function LearnPage() {
                     className="bg-gradient-to-br from-amber-100 to-orange-100 border-2 border-orange-300 rounded-xl p-6 hover:shadow-lg hover:scale-105 transition-all duration-200 cursor-pointer min-h-48 flex flex-col items-center justify-center"
                   >
                     <div className="text-5xl mb-3">{ex.emoji}</div>
-                    <div className="font-bold text-gray-800 text-base mb-2 text-center">{ex.word}</div>
+                    <div className="font-bold text-gray-800 text-base mb-2 text-center">{ex.word.toLowerCase()}</div>
                     <div className="mt-auto inline-flex items-center justify-center w-8 h-8 bg-blue-500 text-white rounded-full">
                       <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
                         <path d="M6.3 2.841A1.5 1.5 0 004 4.11V15.89a1.5 1.5 0 002.3 1.269l9.344-5.89a1.5 1.5 0 000-2.538L6.3 2.84z" />

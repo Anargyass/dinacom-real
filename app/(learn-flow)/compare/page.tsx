@@ -30,9 +30,9 @@ export default function ComparePage() {
 
   const handlePlayLetterSound = (isLeft: boolean) => {
     if (isLeft) {
-      playAudio(`${material.letterLeft.uppercase}... ${material.letterLeft.sound}`)
+      playAudio(material.letterLeft.sound)
     } else {
-      playAudio(`${material.letterRight.uppercase}... ${material.letterRight.sound}`)
+      playAudio(material.letterRight.sound)
     }
   }
 
@@ -149,7 +149,7 @@ export default function ComparePage() {
                   >
                     <div className="text-center">
                       <div className="text-3xl mb-2">{example.emoji}</div>
-                      <div className="font-bold text-blue-900 text-sm">{example.word}</div>
+                      <div className="font-bold text-blue-900 text-sm">{example.word.toLowerCase()}</div>
                       <span className="inline-flex items-center justify-center w-7 h-7 bg-blue-500 text-white rounded-full mt-2">
                         <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20">
                           <path d="M6.3 2.841A1.5 1.5 0 004 4.11V15.89a1.5 1.5 0 002.3 1.269l9.344-5.89a1.5 1.5 0 000-2.538L6.3 2.84z" />
@@ -195,7 +195,7 @@ export default function ComparePage() {
                   >
                     <div className="text-center">
                       <div className="text-3xl mb-2">{example.emoji}</div>
-                      <div className="font-bold text-pink-900 text-sm">{example.word}</div>
+                      <div className="font-bold text-pink-900 text-sm">{example.word.toLowerCase()}</div>
                       <span className="inline-flex items-center justify-center w-7 h-7 bg-pink-500 text-white rounded-full mt-2">
                         <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20">
                           <path d="M6.3 2.841A1.5 1.5 0 004 4.11V15.89a1.5 1.5 0 002.3 1.269l9.344-5.89a1.5 1.5 0 000-2.538L6.3 2.84z" />
@@ -284,7 +284,7 @@ export default function ComparePage() {
             </p>
             <div className="flex flex-col md:flex-row gap-3">
               <Link
-                href="/learn-flow/test"
+                href="/tes"
                 className="flex-1 px-4 py-3 bg-emerald-500 hover:bg-emerald-600 text-white font-bold rounded-xl transition-all duration-200 shadow-lg inline-block"
               >
                 Mulai Tes Sekarang →

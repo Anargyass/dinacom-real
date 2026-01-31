@@ -20,7 +20,7 @@ export default function Navbar() {
           </div>
 
           {/* Navigation Links - Positioned to the right */}
-          <div className="hidden md:flex items-center space-x-8 ml-auto mr-12">
+          <div className="hidden md:flex items-center space-x-8 ml-auto">
             <Link 
               href="/panduan-orang-tua" 
               className="text-gray-700 hover:text-gray-900 text-sm font-medium"
@@ -38,22 +38,6 @@ export default function Navbar() {
               className="text-gray-700 hover:text-gray-900 text-sm font-medium"
             >
               Tentang kami
-            </Link>
-          </div>
-
-          {/* Auth Buttons */}
-          <div className="flex items-center space-x-4">
-            <Link 
-              href="/login" 
-              className="px-6 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50 transition-colors"
-            >
-              Log In
-            </Link>
-            <Link 
-              href="/signup" 
-              className="px-6 py-2 text-sm font-medium text-white bg-emerald-500 rounded-md hover:bg-emerald-600 transition-colors"
-            >
-              Sign In
             </Link>
           </div>
         </div>

@@ -28,7 +28,7 @@ interface AnswerResponse {
   }
 }
 
-const API_BASE_URL = 'http://192.168.29.168:8080'
+const API_BASE_URL = 'https://dinacom-be.evandra.works'
 
 export default function TestPage() {
   const router = useRouter()
@@ -58,7 +58,9 @@ export default function TestPage() {
     }
     setUserId(storedUserId)
 
-    // Generate session ID for this test
+    // Clear old session and generate new session ID for this test
+    localStorage.removeItem('preder_current_session_id')
+    localStorage.removeItem('preder_chatbot_session_id')
     const newSessionId = `session_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`
     setSessionId(newSessionId)
     localStorage.setItem('preder_current_session_id', newSessionId)
@@ -210,11 +212,41 @@ export default function TestPage() {
   }
 
   const currentQuestion = questions[currentQuestionIndex]
+  // Random motivational quotes
+  const loadingQuotes = [
+    "Semangat belajar ya! Kamu pasti bisa! 💪",
+    "Huruf-huruf ini mudah kok, pelan-pelan saja! 🌟",
+    "Kamu hebat! Terus semangat! ⭐",
+    "Belajar itu menyenangkan, yuk kita mulai! 🎉",
+    "Setiap huruf punya cerita tersendiri! 📖",
+    "Kamu sudah siap, ayo kita mulai! 🚀",
+    "Percaya pada dirimu sendiri! 💫"
+  ]
+  
+  const randomQuote = loadingQuotes[Math.floor(Math.random() * loadingQuotes.length)]
 
   if (isLoading) {
     return (
       <div className="min-h-screen bg-[#F5EFE7] flex items-center justify-center">
-        <div className="text-2xl font-bold text-gray-900">Memuat soal...</div>
+        <div className="flex flex-col items-center justify-center gap-6 max-w-md px-4">
+          <div className="animate-bounce">
+            <Image
+              src="/images/Maskot%20-%203%201.png"
+              alt="Maskot Preder"
+              width={150}
+              height={150}
+              priority
+            />
+          </div>
+          <p className="text-xl md:text-2xl font-bold text-gray-900 text-center">
+            {randomQuote}
+          </p>
+          <div className="flex gap-2">
+            <span className="w-3 h-3 bg-blue-500 rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></span>
+            <span className="w-3 h-3 bg-blue-500 rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></span>
+            <span className="w-3 h-3 bg-blue-500 rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></span>
+          </div>
+        </div>
       </div>
     )
   }
