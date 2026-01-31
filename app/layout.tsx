@@ -10,8 +10,11 @@ const lexend = Lexend({
 });
 
 export const metadata: Metadata = {
-  title: "Preder - Platform Belajar untuk Disleksia denagn AI <As></As>sisted Learning",
-  description: "Platform pembelajaran interaktif khusus untuk penyandang disleksia",
+  title: "Preder - Platform Belajar untuk anak Disleksia dengan AI Assisted Learning",
+  description: "Platform pembelajaran interaktif khusus untuk anak penyandang disleksia",
+  icons: {
+    icon: "/images/logo-depan.png",
+  },
 };
 
 export default function RootLayout({
@@ -22,6 +25,7 @@ export default function RootLayout({
   return (
     <html lang="id" style={{ fontFamily: 'var(--font-lexend), sans-serif' }}>
       <head>
+        <link rel="icon" href="/images/logo-depan.png" type="image/png" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap" rel="stylesheet" />
